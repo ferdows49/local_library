@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from datetime import date
+from django.contrib.auth.models import User
 
 
 class Book(models.Model):
@@ -23,7 +25,7 @@ class Book(models.Model):
 class BookInstance(models.Model):
     """Model represnt a specific copy of book"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='unique id')
-    book = models.ForeignKey('Book', on_delete=SET_NULL, null=True)
+    book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     imprient = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
 
