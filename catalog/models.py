@@ -48,7 +48,7 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """Representing the model object"""
-        return f' {self.id} ({self.book.title}) '
+        return f'{self.id} ({self.book.title})'
 
 
 class Author(models.Model):
