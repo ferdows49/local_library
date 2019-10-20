@@ -16,17 +16,21 @@ class Book(models.Model):
 
     def __str__(self):
         """Representing the model object"""
-        self.title
+        return self.title
     
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
+
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    display_genre.short_description = 'Genre'
 
 
 class BookInstance(models.Model):
     """Model represnt a specific copy of book"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='unique id')
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
-    imprient = models.CharField(max_length=200)
+    imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
 
     LOAN_STATUS = (
